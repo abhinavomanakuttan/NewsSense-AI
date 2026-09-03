@@ -1,0 +1,77 @@
+# Web Framework
+fastapi
+uvicorn[standard]
+pydantic
+pydantic-settings
+
+# Database
+sqlalchemy[asyncio]
+asyncpg
+alembic
+psycopg2-binary
+
+# Authentication
+python-jose[cryptography]
+passlib[bcrypt]
+bcrypt>=4.0.0,<4.1.0
+python-multipart
+
+# Redis
+redis
+
+# HTTP Client
+httpx
+feedparser
+beautifulsoup4
+lxml
+
+# NLP / AI
+torch
+transformers
+sentence-transformers
+spacy
+accelerate
+
+# LangChain
+langchain
+langchain-core
+langchain-community
+langchain-huggingface
+langchain-elasticsearch
+
+# LangGraph (orchestrator workflow)
+langgraph
+
+# Vector DB
+qdrant-client
+
+# Search
+elasticsearch
+
+# Task Queue
+celery[redis,rabbitmq]
+
+# Storage
+minio
+
+# Utilities
+python-dateutil
+numpy
+pandas
+scikit-learn
+nltk
+dateparser
+tqdm
+tenacity
+
+# Monitoring / Logging
+prometheus-client
+loguru
+structlog
+
+# Testing
+pytest
+pytest-asyncio
+pytest-cov
+factory-boy
+faker

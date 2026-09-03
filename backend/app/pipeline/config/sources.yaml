@@ -1,0 +1,864 @@
+# NewsSense AI - Source Configuration
+# Each category has its own set of sources (RSS feeds, News APIs, official feeds).
+# Sources can be enabled/disabled via `active: false` without changing code.
+# Priority: high = every 1-2 min (breaking), normal = every 5-15 min, low = every 15-30 min
+
+# ---------------------------------------------------------------------------
+# Default settings applied to every source unless overridden
+# ---------------------------------------------------------------------------
+defaults:
+  fetch_interval_minutes: 15
+  rate_limit: 60          # requests per hour
+  reliability_score: 0.5
+  priority: normal
+  timeout_seconds: 30
+  max_retries: 3
+  retry_backoff_base: 2   # exponential backoff base seconds
+  retry_backoff_max: 60   # max wait between retries
+
+# ---------------------------------------------------------------------------
+# Per-priority fetch intervals (seconds) used by the scheduler
+# ---------------------------------------------------------------------------
+schedules:
+  high: 120       # 2 minutes – breaking news
+  normal: 600     # 10 minutes – standard feeds
+  low: 1800       # 30 minutes – slow-moving categories
+
+# ---------------------------------------------------------------------------
+# POLITICS
+# ---------------------------------------------------------------------------
+politics:
+  - name: "Reuters - Politics"
+    url: "https://www.reuters.com"
+    domain: "reuters.com"
+    feed_url: "https://www.reuters.com/arc/outboundfeeds/v3/all/rss.xml"
+    source_type: rss
+    language: en
+    country: us
+    priority: normal
+    reliability_score: 0.95
+    active: true
+
+  - name: "AP News - Politics"
+    url: "https://apnews.com"
+    domain: "apnews.com"
+    feed_url: "https://feedz.io/rss/everything/politics"
+    source_type: rss
+    language: en
+    country: us
+    priority: normal
+    reliability_score: 0.95
+    active: true
+
+  - name: "BBC News - Politics"
+    url: "https://www.bbc.co.uk"
+    domain: "bbc.co.uk"
+    feed_url: "https://feeds.bbci.co.uk/news/politics/rss.xml"
+    source_type: rss
+    language: en
+    country: gb
+    priority: normal
+    reliability_score: 0.92
+    active: true
+
+  - name: "The Guardian - Politics"
+    url: "https://www.theguardian.com"
+    domain: "theguardian.com"
+    feed_url: "https://www.theguardian.com/politics/rss"
+    source_type: rss
+    language: en
+    country: gb
+    priority: normal
+    reliability_score: 0.88
+    active: true
+
+  - name: "Al Jazeera - Politics"
+    url: "https://www.aljazeera.com"
+    domain: "aljazeera.com"
+    feed_url: "https://www.aljazeera.com/xml/rss/all.xml"
+    source_type: rss
+    language: en
+    country: qa
+    priority: normal
+    reliability_score: 0.82
+    active: true
+
+  - name: "Politico"
+    url: "https://www.politico.com"
+    domain: "politico.com"
+    feed_url: "https://rss.politico.com/politics-news.xml"
+    source_type: rss
+    language: en
+    country: us
+    priority: normal
+    reliability_score: 0.85
+    active: true
+
+  - name: "The Hill"
+    url: "https://thehill.com"
+    domain: "thehill.com"
+    feed_url: "https://thehill.com/feed/"
+    source_type: rss
+    language: en
+    country: us
+    priority: normal
+    reliability_score: 0.80
+    active: true
+
+  - name: "NPR Politics"
+    url: "https://www.npr.org"
+    domain: "npr.org"
+    feed_url: "https://feeds.npr.org/1014/rss.xml"
+    source_type: rss
+    language: en
+    country: us
+    priority: normal
+    reliability_score: 0.90
+    active: true
+
+# ---------------------------------------------------------------------------
+# SPORTS
+# ---------------------------------------------------------------------------
+sports:
+  - name: "ESPN - Sports"
+    url: "https://www.espn.com"
+    domain: "espn.com"
+    feed_url: "https://www.espn.com/espn/rss/news"
+    source_type: rss
+    language: en
+    country: us
+    priority: normal
+    reliability_score: 0.90
+    active: true
+
+  - name: "BBC Sport"
+    url: "https://www.bbc.co.uk/sport"
+    domain: "bbc.co.uk"
+    feed_url: "https://feeds.bbci.co.uk/sport/rss.xml"
+    source_type: rss
+    language: en
+    country: gb
+    priority: normal
+    reliability_score: 0.92
+    active: true
+
+  - name: "Sky Sports"
+    url: "https://www.skysports.com"
+    domain: "skysports.com"
+    feed_url: "https://www.skysports.com/rss/12040"
+    source_type: rss
+    language: en
+    country: gb
+    priority: normal
+    reliability_score: 0.85
+    active: true
+
+  - name: "The Athletic"
+    url: "https://theathletic.com"
+    domain: "theathletic.com"
+    feed_url: "https://theathletic.com/feed/"
+    source_type: rss
+    language: en
+    country: us
+    priority: normal
+    reliability_score: 0.88
+    active: true
+
+  - name: "Sports Illustrated"
+    url: "https://www.si.com"
+    domain: "si.com"
+    feed_url: "https://www.si.com/rss/si_topstories.rss"
+    source_type: rss
+    language: en
+    country: us
+    priority: low
+    reliability_score: 0.80
+    active: true
+
+  - name: "L'Équipe"
+    url: "https://www.lequipe.fr"
+    domain: "lequipe.fr"
+    feed_url: "https://www.lequipe.fr/rss/actu/ALL.xml"
+    source_type: rss
+    language: fr
+    country: fr
+    priority: low
+    reliability_score: 0.85
+    active: true
+
+  - name: "ESPN Cricinfo"
+    url: "https://www.espncricinfo.com"
+    domain: "espncricinfo.com"
+    feed_url: "https://www.espncricinfo.com/rss/content/feed.xml"
+    source_type: rss
+    language: en
+    country: in
+    priority: low
+    reliability_score: 0.85
+    active: true
+
+  - name: "Fox Sports"
+    url: "https://www.foxsports.com"
+    domain: "foxsports.com"
+    feed_url: "https://www.foxsports.com/rss/feed/fss-sports-news-feed"
+    source_type: rss
+    language: en
+    country: us
+    priority: low
+    reliability_score: 0.78
+    active: true
+
+# ---------------------------------------------------------------------------
+# SCIENCE
+# ---------------------------------------------------------------------------
+science:
+  - name: "Nature"
+    url: "https://www.nature.com"
+    domain: "nature.com"
+    feed_url: "https://www.nature.com/nature.rss"
+    source_type: rss
+    language: en
+    country: gb
+    priority: low
+    reliability_score: 0.95
+    active: true
+
+  - name: "Science Daily"
+    url: "https://www.sciencedaily.com"
+    domain: "sciencedaily.com"
+    feed_url: "https://www.sciencedaily.com/rss/all.xml"
+    source_type: rss
+    language: en
+    country: us
+    priority: normal
+    reliability_score: 0.85
+    active: true
+
+  - name: "Phys.org"
+    url: "https://phys.org"
+    domain: "phys.org"
+    feed_url: "https://phys.org/rss-feed/"
+    source_type: rss
+    language: en
+    country: us
+    priority: normal
+    reliability_score: 0.82
+    active: true
+
+  - name: "Science Magazine"
+    url: "https://www.science.org"
+    domain: "science.org"
+    feed_url: "https://www.science.org/rss/news_current.xml"
+    source_type: rss
+    language: en
+    country: us
+    priority: normal
+    reliability_score: 0.95
+    active: true
+
+  - name: "New Scientist"
+    url: "https://www.newscientist.com"
+    domain: "newscientist.com"
+    feed_url: "https://www.newscientist.com/feed/home/"
+    source_type: rss
+    language: en
+    country: gb
+    priority: normal
+    reliability_score: 0.88
+    active: true
+
+  - name: "Ars Technica - Science"
+    url: "https://arstechnica.com"
+    domain: "arstechnica.com"
+    feed_url: "https://feeds.arstechnica.com/arstechnica/science"
+    source_type: rss
+    language: en
+    country: us
+    priority: normal
+    reliability_score: 0.85
+    active: true
+
+  - name: "Space.com"
+    url: "https://www.space.com"
+    domain: "space.com"
+    feed_url: "https://www.space.com/feeds/all"
+    source_type: rss
+    language: en
+    country: us
+    priority: low
+    reliability_score: 0.80
+    active: true
+
+# ---------------------------------------------------------------------------
+# TECHNOLOGY
+# ---------------------------------------------------------------------------
+technology:
+  - name: "TechCrunch"
+    url: "https://techcrunch.com"
+    domain: "techcrunch.com"
+    feed_url: "https://techcrunch.com/feed/"
+    source_type: rss
+    language: en
+    country: us
+    priority: normal
+    reliability_score: 0.88
+    active: true
+
+  - name: "The Verge"
+    url: "https://www.theverge.com"
+    domain: "theverge.com"
+    feed_url: "https://www.theverge.com/rss/index.xml"
+    source_type: rss
+    language: en
+    country: us
+    priority: normal
+    reliability_score: 0.88
+    active: true
+
+  - name: "Ars Technica"
+    url: "https://arstechnica.com"
+    domain: "arstechnica.com"
+    feed_url: "https://feeds.arstechnica.com/arstechnica/index"
+    source_type: rss
+    language: en
+    country: us
+    priority: normal
+    reliability_score: 0.90
+    active: true
+
+  - name: "Wired"
+    url: "https://www.wired.com"
+    domain: "wired.com"
+    feed_url: "https://www.wired.com/feed/rss"
+    source_type: rss
+    language: en
+    country: us
+    priority: normal
+    reliability_score: 0.88
+    active: true
+
+  - name: "Hacker News (Best)"
+    url: "https://news.ycombinator.com"
+    domain: "news.ycombinator.com"
+    feed_url: "https://hnrss.org/best"
+    source_type: rss
+    language: en
+    country: us
+    priority: high
+    reliability_score: 0.85
+    active: true
+
+  - name: "MIT Technology Review"
+    url: "https://www.technologyreview.com"
+    domain: "technologyreview.com"
+    feed_url: "https://www.technologyreview.com/feed/"
+    source_type: rss
+    language: en
+    country: us
+    priority: normal
+    reliability_score: 0.90
+    active: true
+
+  - name: "Engadget"
+    url: "https://www.engadget.com"
+    domain: "engadget.com"
+    feed_url: "https://www.engadget.com/rss.xml"
+    source_type: rss
+    language: en
+    country: us
+    priority: normal
+    reliability_score: 0.82
+    active: true
+
+  - name: "Gizmodo"
+    url: "https://gizmodo.com"
+    domain: "gizmodo.com"
+    feed_url: "https://gizmodo.com/feed"
+    source_type: rss
+    language: en
+    country: us
+    priority: low
+    reliability_score: 0.78
+    active: true
+
+  - name: "TechRadar"
+    url: "https://www.techradar.com"
+    domain: "techradar.com"
+    feed_url: "https://www.techradar.com/rss"
+    source_type: rss
+    language: en
+    country: gb
+    priority: low
+    reliability_score: 0.80
+    active: true
+
+  - name: "The Register"
+    url: "https://www.theregister.com"
+    domain: "theregister.com"
+    feed_url: "https://www.theregister.com/headlines.atom"
+    source_type: rss
+    language: en
+    country: gb
+    priority: normal
+    reliability_score: 0.82
+    active: true
+
+# ---------------------------------------------------------------------------
+# BUSINESS
+# ---------------------------------------------------------------------------
+business:
+  - name: "Bloomberg"
+    url: "https://www.bloomberg.com"
+    domain: "bloomberg.com"
+    feed_url: "https://feeds.bloomberg.com/markets/news.rss"
+    source_type: rss
+    language: en
+    country: us
+    priority: high
+    reliability_score: 0.95
+    active: true
+
+  - name: "Financial Times"
+    url: "https://www.ft.com"
+    domain: "ft.com"
+    feed_url: "https://www.ft.com/rss/home"
+    source_type: rss
+    language: en
+    country: gb
+    priority: normal
+    reliability_score: 0.95
+    active: true
+
+  - name: "Wall Street Journal"
+    url: "https://www.wsj.com"
+    domain: "wsj.com"
+    feed_url: "https://feeds.a.dj.com/rss/RSSMarketsMain.xml"
+    source_type: rss
+    language: en
+    country: us
+    priority: normal
+    reliability_score: 0.95
+    active: true
+
+  - name: "CNBC"
+    url: "https://www.cnbc.com"
+    domain: "cnbc.com"
+    feed_url: "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=10000664"
+    source_type: rss
+    language: en
+    country: us
+    priority: normal
+    reliability_score: 0.88
+    active: true
+
+  - name: "MarketWatch"
+    url: "https://www.marketwatch.com"
+    domain: "marketwatch.com"
+    feed_url: "https://feeds.content.dowjones.io/public/rss/mw_topstories"
+    source_type: rss
+    language: en
+    country: us
+    priority: normal
+    reliability_score: 0.85
+    active: true
+
+  - name: "Forbes"
+    url: "https://www.forbes.com"
+    domain: "forbes.com"
+    feed_url: "https://www.forbes.com/business/feed/"
+    source_type: rss
+    language: en
+    country: us
+    priority: normal
+    reliability_score: 0.82
+    active: true
+
+  - name: "Reuters Business"
+    url: "https://www.reuters.com"
+    domain: "reuters.com"
+    feed_url: "https://www.reuters.com/arc/outboundfeeds/v3/all/rss.xml"
+    source_type: rss
+    language: en
+    country: us
+    priority: normal
+    reliability_score: 0.95
+    active: true
+
+  - name: "Yahoo Finance"
+    url: "https://finance.yahoo.com"
+    domain: "finance.yahoo.com"
+    feed_url: "https://finance.yahoo.com/news/rssindex"
+    source_type: rss
+    language: en
+    country: us
+    priority: normal
+    reliability_score: 0.80
+    active: true
+
+# ---------------------------------------------------------------------------
+# ENTERTAINMENT
+# ---------------------------------------------------------------------------
+entertainment:
+  - name: "Variety"
+    url: "https://variety.com"
+    domain: "variety.com"
+    feed_url: "https://variety.com/feed/"
+    source_type: rss
+    language: en
+    country: us
+    priority: normal
+    reliability_score: 0.88
+    active: true
+
+  - name: "The Hollywood Reporter"
+    url: "https://www.hollywoodreporter.com"
+    domain: "hollywoodreporter.com"
+    feed_url: "https://www.hollywoodreporter.com/feed/"
+    source_type: rss
+    language: en
+    country: us
+    priority: normal
+    reliability_score: 0.88
+    active: true
+
+  - name: "Deadline"
+    url: "https://deadline.com"
+    domain: "deadline.com"
+    feed_url: "https://deadline.com/feed/"
+    source_type: rss
+    language: en
+    country: us
+    priority: normal
+    reliability_score: 0.85
+    active: true
+
+  - name: "Entertainment Weekly"
+    url: "https://ew.com"
+    domain: "ew.com"
+    feed_url: "https://ew.com/feed/"
+    source_type: rss
+    language: en
+    country: us
+    priority: normal
+    reliability_score: 0.82
+    active: true
+
+  - name: "Collider"
+    url: "https://collider.com"
+    domain: "collider.com"
+    feed_url: "https://collider.com/feed/"
+    source_type: rss
+    language: en
+    country: us
+    priority: low
+    reliability_score: 0.75
+    active: true
+
+  - name: "IGN"
+    url: "https://www.ign.com"
+    domain: "ign.com"
+    feed_url: "https://feeds.feedburner.com/ign/all"
+    source_type: rss
+    language: en
+    country: us
+    priority: normal
+    reliability_score: 0.80
+    active: true
+
+  - name: "Empire Online"
+    url: "https://www.empireonline.com"
+    domain: "empireonline.com"
+    feed_url: "https://www.empireonline.com/feed/"
+    source_type: rss
+    language: en
+    country: gb
+    priority: low
+    reliability_score: 0.78
+    active: true
+
+# ---------------------------------------------------------------------------
+# WORLD NEWS
+# ---------------------------------------------------------------------------
+world_news:
+  - name: "Reuters - World"
+    url: "https://www.reuters.com"
+    domain: "reuters.com"
+    feed_url: "https://www.reuters.com/arc/outboundfeeds/v3/all/rss.xml"
+    source_type: rss
+    language: en
+    country: us
+    priority: high
+    reliability_score: 0.95
+    active: true
+
+  - name: "BBC News - World"
+    url: "https://www.bbc.co.uk/news"
+    domain: "bbc.co.uk"
+    feed_url: "https://feeds.bbci.co.uk/news/world/rss.xml"
+    source_type: rss
+    language: en
+    country: gb
+    priority: high
+    reliability_score: 0.92
+    active: true
+
+  - name: "Al Jazeera"
+    url: "https://www.aljazeera.com"
+    domain: "aljazeera.com"
+    feed_url: "https://www.aljazeera.com/xml/rss/all.xml"
+    source_type: rss
+    language: en
+    country: qa
+    priority: normal
+    reliability_score: 0.85
+    active: true
+
+  - name: "AP News - World"
+    url: "https://apnews.com"
+    domain: "apnews.com"
+    feed_url: "https://feedz.io/rss/everything/world"
+    source_type: rss
+    language: en
+    country: us
+    priority: high
+    reliability_score: 0.95
+    active: true
+
+  - name: "NPR - World"
+    url: "https://www.npr.org"
+    domain: "npr.org"
+    feed_url: "https://feeds.npr.org/1004/rss.xml"
+    source_type: rss
+    language: en
+    country: us
+    priority: normal
+    reliability_score: 0.90
+    active: true
+
+  - name: "The Guardian - World"
+    url: "https://www.theguardian.com"
+    domain: "theguardian.com"
+    feed_url: "https://www.theguardian.com/world/rss"
+    source_type: rss
+    language: en
+    country: gb
+    priority: normal
+    reliability_score: 0.88
+    active: true
+
+  - name: "DW News (Deutsche Welle)"
+    url: "https://www.dw.com"
+    domain: "dw.com"
+    feed_url: "https://rss.dw.com/rdf/rss-en-all"
+    source_type: rss
+    language: en
+    country: de
+    priority: normal
+    reliability_score: 0.82
+    active: true
+
+  - name: "France 24"
+    url: "https://www.france24.com"
+    domain: "france24.com"
+    feed_url: "https://www.france24.com/en/rss"
+    source_type: rss
+    language: en
+    country: fr
+    priority: normal
+    reliability_score: 0.82
+    active: true
+
+# ---------------------------------------------------------------------------
+# ENVIRONMENT
+# ---------------------------------------------------------------------------
+environment:
+  - name: "The Guardian - Environment"
+    url: "https://www.theguardian.com"
+    domain: "theguardian.com"
+    feed_url: "https://www.theguardian.com/environment/rss"
+    source_type: rss
+    language: en
+    country: gb
+    priority: normal
+    reliability_score: 0.88
+    active: true
+
+  - name: "Carbon Brief"
+    url: "https://www.carbonbrief.org"
+    domain: "carbonbrief.org"
+    feed_url: "https://www.carbonbrief.org/feed/"
+    source_type: rss
+    language: en
+    country: gb
+    priority: normal
+    reliability_score: 0.90
+    active: true
+
+  - name: "Mongabay"
+    url: "https://news.mongabay.com"
+    domain: "mongabay.com"
+    feed_url: "https://news.mongabay.com/feed/"
+    source_type: rss
+    language: en
+    country: us
+    priority: normal
+    reliability_score: 0.85
+    active: true
+
+  - name: "Grist"
+    url: "https://grist.org"
+    domain: "grist.org"
+    feed_url: "https://grist.org/feed/"
+    source_type: rss
+    language: en
+    country: us
+    priority: normal
+    reliability_score: 0.82
+    active: true
+
+  - name: "Yale Environment 360"
+    url: "https://e360.yale.edu"
+    domain: "e360.yale.edu"
+    feed_url: "https://e360.yale.edu/rss.xml"
+    source_type: rss
+    language: en
+    country: us
+    priority: low
+    reliability_score: 0.88
+    active: true
+
+  - name: "Environmental Health News"
+    url: "https://www.ehn.org"
+    domain: "ehn.org"
+    feed_url: "https://www.ehn.org/rss"
+    source_type: rss
+    language: en
+    country: us
+    priority: normal
+    reliability_score: 0.80
+    active: true
+
+  - name: "Deutsche Welle - Environment"
+    url: "https://www.dw.com"
+    domain: "dw.com"
+    feed_url: "https://rss.dw.com/rdf/rss-en-all"
+    source_type: rss
+    language: en
+    country: de
+    priority: low
+    reliability_score: 0.82
+    active: true
+
+  - name: "NASA Earth Observatory"
+    url: "https://earthobservatory.nasa.gov"
+    domain: "earthobservatory.nasa.gov"
+    feed_url: "https://earthobservatory.nasa.gov/feeds/natural-hazards.rss"
+    source_type: rss
+    language: en
+    country: us
+    priority: low
+    reliability_score: 0.92
+    active: true
+
+# ---------------------------------------------------------------------------
+# HEALTH
+# ---------------------------------------------------------------------------
+health:
+  - name: "WHO News"
+    url: "https://www.who.int"
+    domain: "who.int"
+    feed_url: "https://www.who.int/rss-feeds/news-english.xml"
+    source_type: rss
+    language: en
+    country: intl
+    priority: high
+    reliability_score: 0.95
+    active: true
+
+  - name: "STAT News"
+    url: "https://www.statnews.com"
+    domain: "statnews.com"
+    feed_url: "https://www.statnews.com/feed/"
+    source_type: rss
+    language: en
+    country: us
+    priority: normal
+    reliability_score: 0.90
+    active: true
+
+  - name: "BBC Health"
+    url: "https://www.bbc.co.uk/news/health"
+    domain: "bbc.co.uk"
+    feed_url: "https://feeds.bbci.co.uk/news/health/rss.xml"
+    source_type: rss
+    language: en
+    country: gb
+    priority: normal
+    reliability_score: 0.92
+    active: true
+
+  - name: "Medical News Today"
+    url: "https://www.medicalnewstoday.com"
+    domain: "medicalnewstoday.com"
+    feed_url: "https://www.medicalnewstoday.com/news/rss"
+    source_type: rss
+    language: en
+    country: us
+    priority: normal
+    reliability_score: 0.82
+    active: true
+
+  - name: "Harvard Health"
+    url: "https://www.health.harvard.edu"
+    domain: "health.harvard.edu"
+    feed_url: "https://www.health.harvard.edu/blog/feed"
+    source_type: rss
+    language: en
+    country: us
+    priority: normal
+    reliability_score: 0.92
+    active: true
+
+  - name: "WebMD"
+    url: "https://www.webmd.com"
+    domain: "webmd.com"
+    feed_url: "https://rssfeeds.webmd.com/rss/rss.aspx?RSSSource=RSS_PUBLIC"
+    source_type: rss
+    language: en
+    country: us
+    priority: normal
+    reliability_score: 0.78
+    active: true
+
+  - name: "NPR Health"
+    url: "https://www.npr.org"
+    domain: "npr.org"
+    feed_url: "https://feeds.npr.org/1007/rss.xml"
+    source_type: rss
+    language: en
+    country: us
+    priority: normal
+    reliability_score: 0.90
+    active: true
+
+  - name: "CDC News"
+    url: "https://www.cdc.gov"
+    domain: "cdc.gov"
+    feed_url: "https://tools.cdc.gov/api/v2/resources/media/rss"
+    source_type: rss
+    language: en
+    country: us
+    priority: high
+    reliability_score: 0.95
+    active: true
+
+  - name: "Medical Xpress"
+    url: "https://medicalxpress.com"
+    domain: "medicalxpress.com"
+    feed_url: "https://medicalxpress.com/rss-feed/"
+    source_type: rss
+    language: en
+    country: us
+    priority: normal
+    reliability_score: 0.80
+    active: true

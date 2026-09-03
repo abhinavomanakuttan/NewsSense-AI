@@ -1,0 +1,72 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+.venv/
+venv/
+env/
+
+# Node
+node_modules/
+.next/
+out/
+
+# Environment
+.env
+.env.local
+.env.production
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+docker-compose.override.yml
+
+# Logs
+*.log
+logs/
+
+# Database
+*.db
+*.sqlite3
+
+# Uploads
+uploads/
+media/
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+junit/
+
+# Qdrant storage
+qdrant_storage/
+
+# Elasticsearch
+elasticsearch/data/
+
+# MinIO
+minio/data/
+
+# Redis
+redis/data/
+
+# SSL certs
+*.pem
+*.key
+*.crt
+
+# Generated
+*.generated.*
